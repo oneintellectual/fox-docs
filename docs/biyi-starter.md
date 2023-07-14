@@ -17,14 +17,14 @@ biyi-starter快速开发矿建是基于JPA设计的一系列基础类。业务�
 
 基础实体类，所有业务实体类（Entity）都继承此类，此类中定义了以下属性
 
-| 属性       | 数据类型 | 说明           |
-| ---------- | -------- | -------------- |
-| createBy   | String   | 创建者userName |
-| createTime | Date     | 创建时间       |
-| updateBy   | String   | 更新者userName |
-| updateTime | Date     | 更新时间       |
-| lockFlag   | Integer  | 锁定标识       |
-| delFlag    | Integer  | 逻辑删除标识   |
+| 属性  | 数据类型 | 说明  |
+| --- | --- | --- |
+| createBy | String | 创建者userName |
+| createTime | Date | 创建时间 |
+| updateBy | String | 更新者userName |
+| updateTime | Date | 更新时间 |
+| lockFlag | Integer | 锁定标识 |
+| delFlag | Integer | 逻辑删除标识 |
 
 ### BiyiJpaRepository.java
 
@@ -38,18 +38,25 @@ biyi-starter快速开发矿建是基于JPA设计的一系列基础类。业务�
 
 基础接口类，该类实现了以下CRUD接口
 
-| 接口    | 请求方法 | 说明                           |
-| ------- | -------- | ------------------------------ |
-| /page   | POST     | 条件分页查询，支持动态条件查询 |
-| /list   | POST     | 条件列表查询，支持动态条件查询 |
-| /{id}   | GET      | 查询单条数据                   |
-| /       | POST     | 添加                           |
-| /{id}   | PUT      | 修改                           |
-| /{id}   | DELETE   | 删除                           |
-| /import | POST     | 导入                           |
-| /export | POST     | 导出                           |
+| 接口  | 请求方法 | 说明  |
+| --- | --- | --- |
+| /page | POST | 条件分页查询，支持动态条件查询 |
+| /list | POST | 条件列表查询，支持动态条件查询 |
+| /{id} | GET | 查询单条数据 |
+| /   | POST | 添加  |
+| /{id} | PUT | 修改  |
+| /{id} | DELETE | 删除  |
+| /import | POST | 导入  |
+| /export | POST | 导出  |
 
+### BiyiJpaPreConditionRestController.java
 
+预设条件接口类，该类实现了支持预设查询条件的接口
+
+| 接口  | 请求方法 | 说明  |
+| --- | --- | --- |
+| /page | GET | 条件分页查询，支持动态条件查询 |
+| /list | GET |     |
 
 ## 动态查询语法
 
@@ -59,15 +66,15 @@ biyi-starter快速开发矿建是基于JPA设计的一系列基础类。业务�
 
 ```json
 {
-	"property": "value"
+    "property": "value"
 }
 ```
 
 ```json
 {
-	"property": {
+    "property": {
     "expression": "value"
-	}
+    }
 }
 ```
 
@@ -88,21 +95,21 @@ biyi-starter快速开发矿建是基于JPA设计的一系列基础类。业务�
 
 #### 查询表达式支持如下
 
-| 表达式    | 支持数据类型                                                 | 说明                                                         |
-| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 无        | 基础数据类型（与属性定义的数据类型一致）                     | 等值比较                                                     |
-| min       | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 区间最小值，默认为闭区间，通过minClose=false，设置为开区间，如果没有max条件，该条件等价于gt或gte |
-| max       | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 区间最大值，默认为闭区间，通过maxClose=false，设置为开区间，如果没有min条件，该条件等价于lt或lte |
-| lt        | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 小于                                                         |
-| lte       | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 小于或等于                                                   |
-| gt        | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 大于                                                         |
-| gte       | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 大于或等于                                                   |
-| in        | 数组，数组元素为基础数据类型（与属性定义的数据类型一致）     | 多个等值比较条件                                             |
-| contain   | 字符串                                                       | 包含该字符串，等价于"%xxx%"                                  |
-| startWith | 字符串                                                       | 以该字符串开始，等价于"xxx%"                                 |
-| endWith   | 字符串                                                       | 以该字符串结束，等价于"%xxx"                                 |
+| 表达式 | 支持数据类型 | 说明  |
+| --- | --- | --- |
+| 无   | 基础数据类型（与属性定义的数据类型一致） | 等值比较 |
+| min | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 区间最小值，默认为闭区间，通过minClose=false，设置为开区间，如果没有max条件，该条件等价于gt或gte |
+| max | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 区间最大值，默认为闭区间，通过maxClose=false，设置为开区间，如果没有min条件，该条件等价于lt或lte |
+| lt  | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 小于  |
+| lte | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 小于或等于 |
+| gt  | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 大于  |
+| gte | 数值、字符串，日期（字符串，格式为"2023-01-01"和"2023-01-01 23:59:59"）（与属性定义的数据类型一致） | 大于或等于 |
+| in  | 数组，数组元素为基础数据类型（与属性定义的数据类型一致） | 多个等值比较条件 |
+| contain | 字符串 | 包含该字符串，等价于"%xxx%" |
+| startWith | 字符串 | 以该字符串开始，等价于"xxx%" |
+| endWith | 字符串 | 以该字符串结束，等价于"%xxx" |
 
-#### 保留字段?
+#### ~~保留字段~~
 
 `dataScope`是查询条件中的保留属性，该属性接收字符串数组，内容为`createBy`的值，示例如下
 
@@ -116,7 +123,7 @@ biyi-starter快速开发矿建是基于JPA设计的一系列基础类。业务�
 }
 ```
 
-### 分页排序.  222
+### 分页排序
 
 分页排序参数是在分页查询接口中可以设置的参数，示例如下
 
@@ -139,6 +146,55 @@ biyi-starter快速开发矿建是基于JPA设计的一系列基础类。业务�
   }
 }
 ```
+
+## 预设条件查询
+
+### 预设条件参数类
+
+查询参数类需要继承`BiyiBaseParamDTO`类，并在静态块中调用`register()`方法，示例如下
+
+```java
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class DemoParentParamDTO extends BiyiBaseParamDTO<DemoParent> {
+
+  static {
+    register(DemoParentParamDTO.class, DemoParent::getName, ConditionTypeEnum.CONTAIN,
+        DemoParentParamDTO::getName);
+    register(DemoParentParamDTO.class, DemoParent::getCreateTime, ConditionTypeEnum.LT,
+        DemoParentParamDTO::getDateStr);
+  }
+
+  private String name;
+
+  private String dateStr;
+
+}
+```
+
+### 预设条件查询语法
+
+时间格式为`yyyy-MM-dd`
+
+```http
+GET xxx?name=xxx&dateStr=2023-01-01
+```
+
+查询条件为查询`name包含`"xxx"并且`createBy`小于`2023-01-01`的数据
+
+或如下时间格式，`yyyy-MM-dd HH:mm:ss`
+
+```http
+GET xxx?name=xxx&dateStr=2023-01-01%2023%3A59%3A59
+```
+
+### 分页排序
+
+```http
+GET xxx?pageNumber=1&pageSize=20&order=createBy%20asc&name=xxx&dateStr=2023-01-01
+```
+
+order格式为`<property> asc[desc]`或者`<property>`，当order不指定排序方式时，排序方式为desc
 
 ## JPA相关
 
